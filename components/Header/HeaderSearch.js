@@ -1,14 +1,18 @@
 import { useState } from "react";
-import { createStyles, Header, TextInput, Group } from "@mantine/core";
+import {
+  createStyles,
+  Header,
+  TextInput,
+  Group,
+} from "@mantine/core";
 import ColorToggle from "../ColorToggle/ColorToggle";
 import { Search } from "tabler-icons-react";
-import { Logo } from "./Logo";
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(theme => ({
   header: {
     position: "sticky",
     paddingLeft: theme.spacing.md,
-    paddingRight: theme.spacing.md,
+    paddingRight: theme.spacing.md
   },
 
   inner: {
@@ -16,19 +20,19 @@ const useStyles = createStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingLeft: "0.5rem",
+    paddingLeft: "0.5rem"
   },
 
   links: {
     [theme.fn.smallerThan("md")]: {
-      display: "none",
-    },
+      display: "none"
+    }
   },
 
   search: {
     [theme.fn.smallerThan("xs")]: {
-      display: "none",
-    },
+      display: "none"
+    }
   },
 
   link: {
@@ -48,9 +52,9 @@ const useStyles = createStyles((theme) => ({
       backgroundColor:
         theme.colorScheme === "dark"
           ? theme.colors.dark[6]
-          : theme.colors.gray[0],
-    },
-  },
+          : theme.colors.gray[0]
+    }
+  }
 }));
 
 const HeaderSearch = ({ setFlutters }) => {
@@ -68,14 +72,25 @@ const HeaderSearch = ({ setFlutters }) => {
     }
   };
 
+  const returnHome = () => {
+    location.reload();
+    // window.scrollTo(0, 0);
+  };
+
   return (
     <Header height={56} className={classes.header}>
       <div className={classes.inner}>
-        <Logo width={240} />
+        <button onClick={returnHome}>
+          <img
+            src="https://ww2.freelogovectors.net/wp-content/uploads/2023/11/deezer-logo-freelogovectors.net_.png"
+            width={123}
+            height={69}
+          />
+        </button>
         <Group>
           <TextInput
             value={searchTerm}
-            onChange={(e) => handleSearch(e)}
+            onChange={e => handleSearch(e)}
             className={classes.search}
             placeholder="Search"
             icon={<Search size={16} />}

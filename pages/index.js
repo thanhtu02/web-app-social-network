@@ -6,6 +6,10 @@ import Navbar from "../components/Navbar/Navbar";
 import Flutters from "../components/Flutters/Flutters";
 import CreateFlutter from "../components/Flutters/CreateFlutter";
 import HeaderSearch from "../components/Header/HeaderSearch";
+import HomePage from "./home";
+import Community from "./community";
+import 'animate.css';
+import Explore from "./explore";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,11 +42,22 @@ export default function Home() {
               ? theme.colors.dark[8]
               : theme.colors.gray[0],
         },
-      })}
-    >
+      })} >
       <LoadingOverlay visible={isLoading} />
-      <CreateFlutter setFlutters={setFlutters} />
-      <Flutters flutters={flutters} setFlutters={setFlutters} />
+      
+      {page === 'Home' &&
+        <>
+        <HomePage />
+      </>
+      }
+      {page === 'Explore' && <>
+       <Explore/>
+      </>}
+      {page === 'Community' && <>
+        <Community
+          flutters={flutters} setFlutters={setFlutters} />
+        </>}
+      
     </AppShell>
   );
 }

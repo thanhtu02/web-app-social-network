@@ -5,11 +5,11 @@ import {
   Avatar,
   Menu,
   Text,
-  createStyles,
+  createStyles
 } from "@mantine/core";
 import { ChevronRight, Logout } from "tabler-icons-react";
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(theme => ({
   user: {
     display: "block",
     width: "100%",
@@ -20,9 +20,9 @@ const useStyles = createStyles((theme) => ({
       backgroundColor:
         theme.colorScheme === "dark"
           ? theme.colors.dark[8]
-          : theme.colors.gray[0],
-    },
-  },
+          : theme.colors.gray[0]
+    }
+  }
 }));
 
 const UserButton = ({ ...others }) => {
@@ -37,18 +37,15 @@ const UserButton = ({ ...others }) => {
         <UnstyledButton className={classes.user} {...others}>
           <Group>
             <Avatar src={user.picture} radius="xl" />
-
             <div style={{ flex: 1 }}>
               <Text size="sm" weight={500}>
-                {user.nickname}
-              </Text>
-
+                {" "}{user.nickname}{" "}
+              </Text>{" "}
               <Text color="dimmed" size="xs">
-                {user.email}
+                {" "}{user.email}{" "}
               </Text>
-            </div>
-
-            <ChevronRight size={14} />
+            </div>{" "}
+            <ChevronRight size={14} />{" "}
           </Group>
         </UnstyledButton>
       }
@@ -63,10 +60,10 @@ const UserButton = ({ ...others }) => {
         component="a"
         href="/api/auth/logout"
       >
-        Logout
+        Logout{" "}
       </Menu.Item>
     </Menu>
   );
-}
+};
 
 export default UserButton;

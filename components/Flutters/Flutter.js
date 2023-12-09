@@ -21,6 +21,9 @@ import {
   Share,
   BrandTwitter,
   Check,
+  TrashX,
+  TrashOff,
+  ShareOff,
 } from "tabler-icons-react";
 
 const tweetUrl =
@@ -95,7 +98,7 @@ const Flutter = ({ flutter, setFlutters }) => {
 
     console.log(responseJson);
 
-    setFlutters((flutters) =>
+    setFlutters(flutters =>
       flutters.map((flutter) => {
         if (flutter._id === _id) {
           return {
@@ -116,7 +119,7 @@ const Flutter = ({ flutter, setFlutters }) => {
 
   const likeFlutter = async () => {
     setUpdatingLike(true);
-    let action = likesState.includes(user.id) ? "$pull" : "$addToSet";
+    let action = likesState?.includes(user.id) ? "$pull" : "$addToSet";
 
     await fetch("/api/flutter/like", {
       method: "PUT",
@@ -131,7 +134,7 @@ const Flutter = ({ flutter, setFlutters }) => {
     });
 
     setLikesState((likes) => {
-      if (likesState.includes(user.id)) {
+      if (likesState?.includes(user.id)) {
         return likes.filter((like) => like !== user.id);
       }
       return [...likes, user.id];
@@ -163,7 +166,7 @@ const Flutter = ({ flutter, setFlutters }) => {
       autoClose: 5000,
       styles: (theme) => ({
         root: {
-          borderColor: theme.colors.green[6],
+          borderColor: theme.colors.green[7],
         },
       }),
     });
@@ -182,27 +185,27 @@ const Flutter = ({ flutter, setFlutters }) => {
               <Textarea
                 required
                 data-autofocus
-                placeholder="Edit your flutter."
+                placeholder="Edit your status."
                 variant="filled"
-                className={classes.media}
+                 className={classes.media}
                 {...form.getInputProps("editFlutter")}
               />
               <Group position={"right"} mt={20}>
-                <Button type="submit" disabled={inputDisabled}>
+                <Button type="submit" variant="light" disabled={inputDisabled}>
                   Update
                 </Button>
               </Group>
             </form>
           </Modal>
-          <Card withBorder radius="md" className={classes.flutter}>
+          <Card withBorder radius="md" className={classes.footer}>
             <Group>
               <Avatar
-                src={flutterUser.picture}
-                alt={flutterUser.name}
+                src={flutterUser?.picture}
+                alt={flutterUser?.name}
                 radius="xl"
               />
               <div>
-                <Text size="sm">{flutterUser.nickname}</Text>
+                <Text size="sm">{flutterUser?.nickname}</Text>
                 <Text size="xs" color="dimmed">
                   {new Date(postedAt).toLocaleString()}
                 </Text>
@@ -214,9 +217,9 @@ const Flutter = ({ flutter, setFlutters }) => {
             <Card.Section className={classes.footer}>
               <Group position="apart">
                 <Text size="xs" color="dimmed">
-                  {likesState ? likesState.length : 0}
+                  {likesState ? likesState?.length : 0}
                   {` ${
-                    likesState.length === 1 ? "person" : "people"
+                    likesState?.length === 1 ? "person" : "people"
                   } liked this`}
                 </Text>
                 <Group spacing={0}>
@@ -229,14 +232,14 @@ const Flutter = ({ flutter, setFlutters }) => {
                       size={18}
                       color={theme.colors.red[6]}
                       className={
-                        likesState.includes(user.id) ? classes.liked : null
+                        likesState?.includes(user.id) ? classes.liked : null
                       }
                     />
                   </ActionIcon>
                   <Menu
                     control={
                       <ActionIcon size="lg">
-                        <Share size={16} color={theme.colors.blue[6]} />
+                        <Share size={16} color={theme.colors.gray[7]} />
                       </ActionIcon>
                     }
                     transition="fade"
@@ -246,26 +249,24 @@ const Flutter = ({ flutter, setFlutters }) => {
                   >
                     <Menu.Item
                       icon={
-                        <BrandTwitter size={16} color={theme.colors.blue[4]} />
+                        <BrandTwitter size={16} fill={theme.colors.blue[4]} color={theme.colors.blue[4]} />
                       }
                       component="a"
                       href={tweetUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Twitter
+                      Share
                     </Menu.Item>
                   </Menu>
-                  {user.id === flutterUser.id && (
+                  {user.id === flutterUser?.id && (
                     <>
                       <ActionIcon
                         onClick={() => editFlutter()}
                         size="lg"
                         sx={(theme) => ({
                           color:
-                            theme.colorScheme === "dark"
-                              ? theme.colors.green[4]
-                              : theme.colors.green[6],
+                            theme.colors.gray[7],
                         })}
                       >
                         <Edit size={18} />
@@ -275,9 +276,7 @@ const Flutter = ({ flutter, setFlutters }) => {
                         size="lg"
                         sx={(theme) => ({
                           color:
-                            theme.colorScheme === "dark"
-                              ? theme.colors.red[4]
-                              : theme.colors.red[6],
+                           theme.colors.gray[7],
                         })}
                       >
                         <Trash size={18} />

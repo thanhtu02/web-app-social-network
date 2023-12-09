@@ -3,21 +3,21 @@ import { useUser } from "../../context/UserContext";
 import { createStyles, Avatar, Group, Textarea, Button } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
-import { Check } from "tabler-icons-react";
+import { BorderStyle, Check } from "tabler-icons-react";
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(theme => ({
   flutter: {
-    padding: `${theme.spacing.lg}px ${theme.spacing.xl}px`,
+    padding: `${theme.spacing.lg}px ${theme.spacing.xl}px`
   },
   createFlutter: {
-    justifyContent: "center",
+    justifyContent: ""
   },
   media: {
     width: "50vw",
     [`@media (max-width: ${theme.breakpoints.lg}px)`]: {
-      width: "25vw",
-    },
-  },
+      width: "25vw"
+    }
+  }
 }));
 
 const CreateFlutter = ({ setFlutters }) => {
@@ -25,12 +25,12 @@ const CreateFlutter = ({ setFlutters }) => {
   const { classes } = useStyles();
   const form = useForm({
     initialValues: {
-      flutter: "",
-    },
+      flutter: ""
+    }
   });
   const [inputDisabled, setInputDisabled] = useState(false);
 
-  const onSubmitFlutter = async (value) => {
+  const onSubmitFlutter = async value => {
     setInputDisabled(true);
     const flutter = {
       postedAt: Date.now(),
@@ -40,25 +40,25 @@ const CreateFlutter = ({ setFlutters }) => {
         id: user.id,
         name: user.name,
         nickname: user.nickname,
-        picture: user.picture,
-      },
+        picture: user.picture
+      }
     };
     const response = await fetch("/api/flutter", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(flutter),
+      body: JSON.stringify(flutter)
     });
 
     const responseJson = await response.json();
 
-    setFlutters((flutters) => [
+    setFlutters(flutters => [
       {
         _id: responseJson.insertedId,
-        ...flutter,
+        ...flutter
       },
-      ...flutters,
+      ...flutters
     ]);
     form.reset();
     setInputDisabled(false);
@@ -71,28 +71,28 @@ const CreateFlutter = ({ setFlutters }) => {
       message: "Your flutter has been sent",
       icon: <Check size={18} />,
       autoClose: 5000,
-      styles: (theme) => ({
+      styles: theme => ({
         root: {
-          borderColor: theme.colors.green[6],
-        },
-      }),
+          borderColor: theme.colors.green[6]
+        }
+      })
     });
   };
 
   return (
-    <Group position={"center"} mt={10} mb={20}>
+    <Group position={"left"} m={20}>
       <Avatar src={user.picture} alt={user.name} radius="xl" />
-      <form onSubmit={form.onSubmit((value) => onSubmitFlutter(value))}>
+      <form onSubmit={form.onSubmit(value => onSubmitFlutter(value))}>
         <Group>
           <Textarea
             required
-            placeholder="Send a flutter..."
+            placeholder="Post something.. ?"
             variant="filled"
             className={classes.media}
             {...form.getInputProps("flutter")}
-          />
-          <Button type="submit" disabled={inputDisabled}>
-            Send
+          />{" "}
+          <Button type="submit" variant="light" disabled={inputDisabled}>
+            Send{" "}
           </Button>
         </Group>
       </form>

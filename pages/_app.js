@@ -4,6 +4,7 @@ import { UserProvider } from "@auth0/nextjs-auth0";
 import { UserProvider as AtlasUserProvider } from "../context/UserContext";
 import { MantineProvider, ColorSchemeProvider } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
+import './styles.css';
 
 export default function App(props) {
   const { Component, pageProps } = props;
@@ -14,7 +15,7 @@ export default function App(props) {
   return (
     <>
       <Head>
-        <title>SocialButterfly - MongoDB Atlas Data API Demo</title>
+        <title> Deezer plans | Not real </title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
@@ -32,18 +33,17 @@ export default function App(props) {
               theme={{
                 colors: {
                   brand: [
-                    "#00684A", // hightlight light
-                    "#fff",
-                    "#fff",
-                    "#fff",
-                    "#fff",
-                    "#00ED64", // icon color dark
-                    "#00684A", // btn-primary light
-                    "#00ED64", // btn-hover light
-                    "#00684A", // btn-primary dark
-                    "#023430", // btn-hover, highlight dark
+                    "#940FC7", // hightlight light
+                    "#FFF", 
+                    "#6633CC", // light green
+                    "#FFFF33", // yellow
+                    "#FF99FF", // pink
+                    "#4D12B7", // icon color dark
+                    "#7527B5", // btn-primary light
+                    "#7F64EA", // btn-hover light
+                    "#6633CC", // btn-primary dark
+                    "#6633CC", // btn-hover, highlight dark
                   ],
-                  // #00ED64, #00684A, #023430
                 },
                 primaryColor: "brand",
                 colorScheme,
